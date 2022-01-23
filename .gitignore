@@ -11,8 +11,8 @@
 .mtj.tmp/
 
 #desktop & core build files
-desktop/bin/
-core/bin/
+desktop/bin/*
+core/bin/*
 
 # Package Files #
 *.jar
