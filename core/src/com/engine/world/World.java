@@ -167,7 +167,11 @@ public class World {
 		spawnObject("stool", new Position(4,10));
 		spawnObject("table", new Position(5,10));
 		spawnObject("stool", new Position(6,10));
+		spawnObject("stool", new Position(5,11));
+		spawnObject("stool", new Position(5,9));
 		spawnObject("well", new Position(9,10));
+		spawnObject("bed_sack", new Position(11,10));
+		spawnObject("bed_wooden", new Position(13,10));
 		
 		spawnPlayer(Constants.generateId(), new Position(5,5), true);
 		spawnLivingEntity("man",new Position(8,8));
@@ -181,6 +185,10 @@ public class World {
 				int i = r.nextInt(100);
 				
 				
+				if(((x == 2 || x == width - 2) && y >= 2) || 
+						((y == 2 || y == height - 2) && x >= 2)) {
+					spawnObject("tree", position);
+				}
 				
 				String type = "grass";
 
@@ -193,6 +201,8 @@ public class World {
 						spawnObject("weed", position);
 					}
 				}
+				
+				
 				
 				Tile tile = new Tile(Constants.generateId(), type, position);
 				tiles.put(tile.getId(), tile);

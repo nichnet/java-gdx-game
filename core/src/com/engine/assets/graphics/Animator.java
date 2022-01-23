@@ -70,12 +70,11 @@ public class Animator {
 			advanceAnimation();			
 		}
 		
-		Renderer.getInstance().draw(getCurrentSprite().getTexture(), attachedToObject.getPosition());
+		Renderer.getInstance().draw(attachedToObject);
 		
 		if(Game.getInstance().isDebugModeActive()) {
 			if(getCurrentSprite().getBounds() != null) {
-				Renderer.getInstance().drawShape(getCurrentSprite().getBounds(), attachedToObject.getPosition());				
-				
+				Renderer.getInstance().drawShape(attachedToObject);				
 			}
 		}
 	}

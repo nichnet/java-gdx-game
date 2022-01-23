@@ -3,9 +3,17 @@
 	"sprites": [
 		{
 			"name":"stool",
-			"bounds": []
+			"bounds": [
+				6, 12,
+				6, 18,
+				26, 18,
+				26, 12]
 		}
 	],
+	"offset": {
+		"x":0,
+		"y":6
+	},
 	"properties": {
 	}
 }

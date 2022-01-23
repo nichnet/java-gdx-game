@@ -109,8 +109,8 @@ public abstract class AssetManagerBase extends ResourceManagerBase {
 		
 		for(int i = 0; i < spritesDataArr.size(); i++) {
 			JSONObject spriteData = (JSONObject) spritesDataArr.get(i);
-			
-			String name = getProperty(spriteData, "name");
+
+			String name = getProperty(spriteData, "name");		
 			Bounds bounds = getBounds(spriteData);
 			
 			sprites[i] = new Sprite(name).setBounds(bounds);

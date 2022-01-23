@@ -55,10 +55,21 @@ public final class ObjectAssetManager extends AssetManagerBase {
 				Sprite[] sprites = getSprites(obj);
 				Animation[] animations = getAnimations(obj);
 				
+				
+				//offset
+				int offsetX = 0;
+				int offsetY = 0;
+				
+				if(hasProperty(obj, "offset")) {
+					JSONObject offset = (JSONObject) obj.get("offset");
+					offsetX = (int) ((long) getProperty(offset, "x"));
+					offsetY = (int) ((long) getProperty(offset, "y"));
+				}
+				
 				//properties specific to objects
 				JSONObject properties = (JSONObject) obj.get("properties");
 				
-				addAsset(name, sprites, animations);
+				addAsset(name, sprites, animations, offsetX, offsetY);
 				in.close();
 			} catch (IOException e) {
 				Logger.error(String.format("Failed to load object resource: \"%s\", because the file could not be opened or located.", file));
@@ -69,12 +80,12 @@ public final class ObjectAssetManager extends AssetManagerBase {
 		}
 	}
 
-	private void addAsset(String name, Sprite[] sprites, Animation[] animations) {
+	private void addAsset(String name, Sprite[] sprites, Animation[] animations, int offsetX, int offsetY) {
 		if(this.assets.containsKey(name)) {
 			return;
 		}
 		
-		ObjectAsset asset = new ObjectAsset(name).setSprites(sprites).setAnimations(animations);
+		ObjectAsset asset = new ObjectAsset(name, offsetX, offsetY).setSprites(sprites).setAnimations(animations);
 		
 		this.assets.put(name, asset);
 	}

@@ -17,9 +17,25 @@ public abstract class AssetBase extends ResourceBase {
 
 	private Sprite[] sprites;
 	private Animation[] animations;
-
+	
+	private int offsetX;
+	private int offsetY;
+	
 	public AssetBase(String name) {
+		this(name, 0, 0);
+	}
+
+	public AssetBase(String name, int offsetX, int offsetY) {
 		super(name);
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+	}
+	
+	public int getOffsetX() {
+		return this.offsetX;
+	}
+	public int getOffsetY() {
+		return this.offsetY;
 	}
 	
 	public Sprite getDefaultSprite() {

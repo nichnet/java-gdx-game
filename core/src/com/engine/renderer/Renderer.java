@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.engine.assets.graphics.Bounds;
 import com.engine.assets.graphics.Vector;
+import com.engine.assets.model.AssetBase;
 import com.engine.util.Logger;
 import com.engine.world.Item;
 import com.engine.world.ObjectBase;
@@ -36,7 +37,7 @@ public class Renderer {
 	}
 	
 	public void render() {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
@@ -99,21 +100,27 @@ public class Renderer {
 		return instance;
 	}
 	
-	public void drawShape(Bounds bounds, Position position) {
+	public void drawShape(ObjectBase obj) {
 		shapeRenderer.setColor(Color.GREEN);
+		
+		Bounds bounds = obj.getAnimator().getCurrentSprite().getBounds();
+		Position position = obj.getPosition();
+
+		int offsetX = obj.getAsset().getOffsetX();
+		int offsetY = obj.getAsset().getOffsetY();
 		
 		Vector first = null;
 		Vector previous = null;
-
+		
 		if(bounds.getPoints().length > 0) {
 			for(Vector point : bounds.getPoints()) {
-				int endX = position.getXAsPixel() + point.getX();
-				int endY = position.getYAsPixel() + point.getY();
+				int endX = position.getXAsPixel() + point.getX() + offsetX;
+				int endY = position.getYAsPixel() + point.getY() + offsetY;
 				Vector end = new Vector(endX, endY);
 				
 				
 				if(previous != null) {
-					drawLine(previous.getX(), previous.getY(), end.getX(), end.getY());
+					drawLine(previous, end);
 				} else {
 					//set the first point.
 					first = end;
@@ -123,15 +130,17 @@ public class Renderer {
 			}
 	
 			//draw a line from last to first.
-			drawLine(previous.getX(), previous.getY(), first.getX(), first.getY());
+			drawLine(previous, first);
 		}
 	}
 	
-	private void drawLine(int startX, int startY, int endX, int endY) {
-		shapeRenderer.line(startX, startY, endX, endY);			
+	private void drawLine(Vector start, Vector end) {
+		shapeRenderer.line(start.getX(), start.getY(), end.getX(), end.getY());			
 	}
 
-	public void draw(Texture texture, Position position) {
-		batch.draw(texture, position.getXAsPixel(), position.getYAsPixel());
+	public void draw(ObjectBase obj) {
+		batch.draw(obj.getAnimator().getCurrentSprite().getTexture(), 
+				obj.getPosition().getXAsPixel() + obj.getAsset().getOffsetX(), 
+				obj.getPosition().getYAsPixel() + obj.getAsset().getOffsetY());
 	}
 }

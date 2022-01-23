@@ -3,9 +3,17 @@
 	"sprites": [
 		{
 			"name":"table",
-			"bounds": []
+			"bounds": [
+				0, 12,
+				0, 20,
+				32, 20,
+				32, 12]
 		}
 	],
+	"offset": {
+		"x":0,
+		"y":6
+	},
 	"properties": {
 	}
 }

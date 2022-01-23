@@ -74,7 +74,7 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 		InputManager.getInstance().checkInput();
 		
-//		Logger.log(Gdx.graphics.getFramesPerSecond() + "FPS");
+//		
 		
 		if(!isPaused()) {
 			//Tick all items in the world.
