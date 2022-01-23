@@ -1,0 +1,11 @@
+{
+	"name": "rock",
+	"sprites": [
+		{
+			"name":"rock",
+			"bounds": []
+		}
+	],
+	"properties": {
+	}
+}

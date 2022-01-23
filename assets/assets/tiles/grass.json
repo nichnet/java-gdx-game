@@ -1,0 +1,25 @@
+{
+	"name": "grass",
+	"sprites": [
+		{
+			"name":"grass",
+			"bounds": [
+				0, 0,
+				0, 32,
+				32, 32,
+				32, 0
+			]
+		}
+	],
+	"animations": [
+		{
+			"name":"default",
+			"sprites": [
+				"grass" 
+			]
+		}
+	],
+	"properties": {
+		"walkable": true
+	}
+}

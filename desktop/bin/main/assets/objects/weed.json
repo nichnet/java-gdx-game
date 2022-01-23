@@ -1,0 +1,9 @@
+{
+	"name": "weed",
+	"sprites": [
+		{
+			"name":"weed",
+			"bounds": []
+		}
+	]
+}

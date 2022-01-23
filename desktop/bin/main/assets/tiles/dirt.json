@@ -1,0 +1,17 @@
+{
+	"name": "dirt",
+	"sprites": [
+		{
+			"name":"dirt",
+			"bounds": [
+				0, 0,
+				0, 32,
+				32, 32,
+				32, 0
+			]
+		}
+	],
+	"properties": {
+		"walkable": true
+	}
+}

@@ -1,0 +1,122 @@
+{
+	"name": "man",
+	"sprites": [
+		{
+			"name":"man_south_1",
+			"bounds": []
+		},{
+			"name":"man_south_2",
+			"bounds": []
+		},{
+			"name":"man_south_3",
+			"bounds": []
+		},{
+			"name":"man_north_1",
+			"bounds": []
+		},{
+			"name":"man_north_2",
+			"bounds": []
+		},{
+			"name":"man_north_3",
+			"bounds": []
+		},{
+			"name":"man_east_1",
+			"bounds": []
+		},{
+			"name":"man_east_2",
+			"bounds": []
+		},{
+			"name":"man_east_3",
+			"bounds": []
+		},{
+			"name":"man_west_1",
+			"bounds": []
+		},{
+			"name":"man_west_2",
+			"bounds": []
+		},{
+			"name":"man_west_3",
+			"bounds": []
+		}
+	],
+	"animations": [
+		{
+			"name":"default",
+			"sprites": [
+				"man_south_1"
+			],
+			"speed":0,
+			"loop":false
+		},{
+			"name":"idle_south",
+			"sprites": [
+				"man_south_1"
+			],
+			"speed":0,
+			"loop":false
+		},{
+			"name":"walk_south",
+			"sprites": [
+				"man_south_1",
+				"man_south_2",
+				"man_south_1",
+				"man_south_3"
+			],
+			"speed":6,
+			"loop":true
+		},{
+			"name":"idle_north",
+			"sprites": [
+				"man_north_1"
+			],
+			"speed":0,
+			"loop":false
+		},{
+			"name":"walk_north",
+			"sprites": [
+				"man_north_1",
+				"man_north_2",
+				"man_north_1",
+				"man_north_3"
+			],
+			"speed":6,
+			"loop":true
+		},{
+			"name":"idle_east",
+			"sprites": [
+				"man_east_1"
+			],
+			"speed":0,
+			"loop":false
+		},{
+			"name":"walk_east",
+			"sprites": [
+				"man_east_1",
+				"man_east_2",
+				"man_east_1",
+				"man_east_3"
+			],
+			"speed":6,
+			"loop":true
+		},{
+			"name":"idle_west",
+			"sprites": [
+				"man_west_1"
+			],
+			"speed":0,
+			"loop":false
+		},{
+			"name":"walk_west",
+			"sprites": [
+				"man_west_1",
+				"man_west_2",
+				"man_west_1",
+				"man_west_3"
+			],
+			"speed":6,
+			"loop":true
+		}
+	],
+	"properties": {
+	}
+}

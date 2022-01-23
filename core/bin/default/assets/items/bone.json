@@ -1,0 +1,12 @@
+{
+	"name": "bone",
+	"sprites": [
+		{
+			"name":"bone",
+			"bounds": []
+		}
+	],
+	"properties": {
+		"stackable": false
+	}
+}

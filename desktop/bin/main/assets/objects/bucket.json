@@ -1,0 +1,20 @@
+{
+	"name": "bucket",
+	"sprites": [
+		{
+			"name":"bucket_empty",
+			"bounds": []
+		},{
+			"name":"bucket_water",
+			"bounds": []
+		}
+	],
+	"animations": [
+		{
+			"name":"default",
+			"sprites": [
+				"bucket_water"
+			]
+		}
+	]
+}

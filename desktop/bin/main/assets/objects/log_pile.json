@@ -1,0 +1,11 @@
+{
+	"name": "log_pile",
+	"sprites": [
+		{
+			"name":"log_pile",
+			"bounds": []
+		}
+	],
+	"properties": {
+	}
+}

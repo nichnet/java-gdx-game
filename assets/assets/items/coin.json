@@ -1,0 +1,12 @@
+{
+	"name": "coin",
+	"sprites": [
+		{
+			"name":"coin",
+			"bounds": []
+		}
+	],
+	"properties": {
+		"stackable": true
+	}
+}

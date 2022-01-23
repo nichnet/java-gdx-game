@@ -1,0 +1,17 @@
+{
+	"name": "gravel",
+	"sprites": [
+		{
+			"name":"gravel",
+			"bounds": [
+				0, 0,
+				0, 32,
+				32, 32,
+				32, 0
+			]
+		}
+	],
+	"properties": {
+		"walkable": true
+	}
+}

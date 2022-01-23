@@ -1,0 +1,11 @@
+{
+	"name": "stool",
+	"sprites": [
+		{
+			"name":"stool",
+			"bounds": []
+		}
+	],
+	"properties": {
+	}
+}

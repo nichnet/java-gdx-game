@@ -1,0 +1,12 @@
+{
+	"name": "bread",
+	"sprites": [
+		{
+			"name":"bread",
+			"bounds": []
+		}
+	],
+	"properties": {
+		"stackable": false
+	}
+}

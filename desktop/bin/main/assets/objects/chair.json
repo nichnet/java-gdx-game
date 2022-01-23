@@ -1,0 +1,17 @@
+{
+	"name": "chair",
+	"sprites": [
+		{
+			"name":"chair",
+			"bounds": []
+		}
+	],
+	"animations": [
+		{
+			"name":"default",
+			"sprites": [
+				"chair"
+			]
+		}
+	]
+}

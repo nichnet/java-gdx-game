@@ -1,0 +1,12 @@
+{
+	"name": "dagger_wooden",
+	"sprites": [
+		{
+			"name":"dagger",
+			"bounds": []
+		}
+	],
+	"properties": {
+		"stackable": false
+	}
+}

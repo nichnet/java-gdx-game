@@ -1,0 +1,15 @@
+{
+	"name": "obelisk",
+	"sprites": [
+		{
+			"name":"obelisk",
+			"bounds": [
+				1, 0,
+				1, 16,
+				31, 16,
+				31, 0]
+		}
+	],
+	"properties": {
+	}
+}

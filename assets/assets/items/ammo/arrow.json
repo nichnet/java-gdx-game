@@ -1,0 +1,12 @@
+{
+	"name": "arrow",
+	"sprites": [
+		{
+			"name":"arrow",
+			"bounds": []
+		}
+	],
+	"properties": {
+		"stackable": true
+	}
+}

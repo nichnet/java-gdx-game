@@ -1,0 +1,11 @@
+{
+	"name": "well",
+	"sprites": [
+		{
+			"name":"well",
+			"bounds": []
+		}
+	],
+	"properties": {
+	}
+}
