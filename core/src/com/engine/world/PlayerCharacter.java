@@ -1,7 +1,5 @@
 package com.engine.world;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 public class PlayerCharacter extends LivingEntity {
 
 	public PlayerCharacter(String id, Position position) {
@@ -13,6 +11,25 @@ public class PlayerCharacter extends LivingEntity {
 	 */
 	public boolean isLocalPlayer()  {
 		return true;
+	}
+	
+
+	@Override
+	public void onColliderEnter(ObjectBase other) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onColliderExit(ObjectBase other) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onColliderStay(ObjectBase other) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

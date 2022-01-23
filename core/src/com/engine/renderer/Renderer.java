@@ -28,18 +28,22 @@ public class Renderer {
 	private static Renderer instance;
 	
 	private SpriteBatch batch;
+	private ShapeRenderer lineRenderer;
 	private ShapeRenderer shapeRenderer;
 	
 	Texture text;
 	public Renderer() {
 		batch = new SpriteBatch();
+		lineRenderer = new ShapeRenderer();
 		shapeRenderer = new ShapeRenderer();
-	}
+}
 	
 	public void render() {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+		lineRenderer.begin(ShapeRenderer.ShapeType.Line);
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		lineRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		
 		//update camera
@@ -53,6 +57,7 @@ public class Renderer {
 		renderSortedLayer();
 		
 		batch.end();
+		lineRenderer.end();
 		shapeRenderer.end();
 	}
 
@@ -101,9 +106,18 @@ public class Renderer {
 	}
 	
 	public void drawShape(ObjectBase obj) {
-		shapeRenderer.setColor(Color.GREEN);
+		if(obj.getCollider().isColliding()) {
+			lineRenderer.setColor(Color.RED);
+		} else {
+			lineRenderer.setColor(Color.GREEN);
+		}
+		drawOutline(obj);
+	}
+	
+	
+	private void drawOutline(ObjectBase obj) {
 		
-		Bounds bounds = obj.getAnimator().getCurrentSprite().getBounds();
+		Bounds bounds = obj.getBounds();
 		Position position = obj.getPosition();
 
 		int offsetX = obj.getAsset().getOffsetX();
@@ -135,10 +149,11 @@ public class Renderer {
 	}
 	
 	private void drawLine(Vector start, Vector end) {
-		shapeRenderer.line(start.getX(), start.getY(), end.getX(), end.getY());			
+		lineRenderer.line(start.getX(), start.getY(), end.getX(), end.getY());			
 	}
 
 	public void draw(ObjectBase obj) {
+		
 		batch.draw(obj.getAnimator().getCurrentSprite().getTexture(), 
 				obj.getPosition().getXAsPixel() + obj.getAsset().getOffsetX(), 
 				obj.getPosition().getYAsPixel() + obj.getAsset().getOffsetY());

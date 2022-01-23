@@ -1,10 +1,8 @@
 package com.engine.assets.graphics;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.renderer.Renderer;
 import com.engine.util.Constants;
-import com.engine.util.Logger;
 import com.engine.world.ObjectBase;
 import com.game.Game;
 
@@ -70,6 +68,8 @@ public class Animator {
 			advanceAnimation();			
 		}
 		
+		//attachedToObject.updateCollider()
+	
 		Renderer.getInstance().draw(attachedToObject);
 		
 		if(Game.getInstance().isDebugModeActive()) {

@@ -10,7 +10,6 @@ import com.engine.assets.graphics.Bounds;
 import com.engine.assets.graphics.Sprite;
 import com.engine.assets.model.AssetBase;
 import com.engine.util.Constants;
-import com.engine.util.Logger;
 
 public abstract class AssetManagerBase extends ResourceManagerBase {
 

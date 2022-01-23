@@ -1,8 +1,5 @@
 package com.engine.assets.model;
 
-import com.engine.assets.graphics.Animation;
-import com.engine.assets.graphics.Sprite;
-
 public class ItemAsset extends AssetBase {
 
 	private boolean stackable;

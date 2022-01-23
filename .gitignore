@@ -14,6 +14,9 @@
 desktop/bin/*
 core/bin/*
 
+#ignore sprites folder
+/assets/assets/sprites/*
+
 # Package Files #
 *.jar
 *.war

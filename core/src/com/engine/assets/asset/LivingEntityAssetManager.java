@@ -14,7 +14,6 @@ import com.engine.assets.AssetManagerBase;
 import com.engine.assets.graphics.Animation;
 import com.engine.assets.graphics.Sprite;
 import com.engine.assets.model.LivingEntityAsset;
-import com.engine.assets.model.ObjectAsset;
 import com.engine.util.Logger;
 
 public final class LivingEntityAssetManager extends AssetManagerBase {

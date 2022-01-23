@@ -1,11 +1,6 @@
 package com.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.engine.renderer.Camera;
 import com.engine.renderer.Renderer;
 import com.engine.world.World;
@@ -42,6 +37,7 @@ public class Game extends ApplicationAdapter {
 	}
 	
 	
+	
 	private void preloadAssets() {
 		Logger.log("Preloading...");
 		//settings
@@ -69,18 +65,16 @@ public class Game extends ApplicationAdapter {
 		AssetsManager.getInstance().load();
 		Logger.log(String.format("Loaded %d Assets.", AssetsManager.getInstance().getSize()));
 	}
-
+	
 	@Override
 	public void render () {
 		InputManager.getInstance().checkInput();
 		
-//		
-		
 		if(!isPaused()) {
 			//Tick all items in the world.
-			Game.getInstance().getCurrentWorld().tick();
+			getCurrentWorld().tick();
 		}
-		
+
 		Renderer.getInstance().render();
 	}
 	

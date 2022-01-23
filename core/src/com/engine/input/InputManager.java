@@ -2,9 +2,6 @@ package com.engine.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.engine.assets.graphics.Bounds;
-import com.engine.renderer.Renderer;
-import com.engine.world.Position;
 import com.game.Game;
 
 public class InputManager {

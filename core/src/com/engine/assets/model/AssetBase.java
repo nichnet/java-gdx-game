@@ -1,17 +1,13 @@
 package com.engine.assets.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.engine.assets.ResourceBase;
 import com.engine.assets.graphics.Animation;
 import com.engine.assets.graphics.Bounds;
 import com.engine.assets.graphics.Sprite;
 import com.engine.assets.language.LanguageManager;
-import com.engine.util.Logger;
 
 public abstract class AssetBase extends ResourceBase {
 
@@ -42,6 +38,7 @@ public abstract class AssetBase extends ResourceBase {
 		return sprites[0];
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T extends AssetBase> T setAnimations(Animation[] animations) {
 		List<Animation> anims = new ArrayList<Animation>();
 	

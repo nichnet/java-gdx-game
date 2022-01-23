@@ -1,7 +1,9 @@
 package com.engine.world;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 import com.engine.util.Constants;
@@ -14,7 +16,6 @@ public class World {
 	private String name;
 	private int width;
 	private int height;
-	private int maxDepth;
 	
 	//hash maps of all currently spawned things in the world.
 	private HashMap<String, Tile> tiles;
@@ -30,7 +31,7 @@ public class World {
 	 * @return array of tiles
 	 */
 	public Tile[] getRenderableTiles() {
-		HashSet<Tile> renderable = new HashSet();
+		HashSet<Tile> renderable = new HashSet<Tile>();
 		
 		for(Tile tile : tiles.values()) {
 			if(tile.isVisible()) {
@@ -47,7 +48,7 @@ public class World {
 	 * @return array of entities
 	 */
 	public Entity[] getRenderableEntities() {
-		HashSet<Entity> renderable = new HashSet();
+		HashSet<Entity> renderable = new HashSet<Entity>();
 		
 		for(Entity entity : entities.values()) {
 			if(entity.isVisible()) {
@@ -63,7 +64,7 @@ public class World {
 	 * @return array of living entities
 	 */
 	public LivingEntity[] getRenderableLivingEntities() {
-		HashSet<LivingEntity> renderable = new HashSet();
+		HashSet<LivingEntity> renderable = new HashSet<LivingEntity>();
 		
 		for(LivingEntity livingEntity : livingEntities.values()) {
 			if(livingEntity.isVisible()) {
@@ -80,7 +81,7 @@ public class World {
 	 * @return array of items
 	 */
 	public Item[] getRenderableItems() {
-		HashSet<Item> renderable = new HashSet();
+		HashSet<Item> renderable = new HashSet<Item>();
 		
 		for(Item item : items.values()) {
 			if(item.isVisible()) {
@@ -97,7 +98,7 @@ public class World {
 	 * @return array of objects
 	 */
 	public Object[] getRenderableObjects() {
-		HashSet<Object> renderable = new HashSet();
+		HashSet<Object> renderable = new HashSet<Object>();
 		
 		for(Object obj : objects.values()) {
 			if(obj.isVisible()) {
@@ -114,7 +115,7 @@ public class World {
 	 * @return array of players
 	 */
 	public PlayerCharacter[] getRenderablePlayers() {
-		HashSet<PlayerCharacter> renderable = new HashSet();
+		HashSet<PlayerCharacter> renderable = new HashSet<PlayerCharacter>();
 		
 		for(PlayerCharacter player : playerCharacters.values()) {
 			if(player.isVisible()) {
@@ -442,5 +443,18 @@ public class World {
 	 */
 	public int getSize() {
 		return (this.width * this.height);
+	}
+
+	public ObjectBase[] getAllObjects() {
+		List<ObjectBase> all = new ArrayList<>();
+
+		all.addAll(tiles.values());
+		all.addAll(objects.values());
+		all.addAll(items.values());
+		all.addAll(playerCharacters.values());
+		all.addAll(entities.values());
+		all.addAll(livingEntities.values());
+		
+		return all.toArray(new ObjectBase[] {});
 	}
 }

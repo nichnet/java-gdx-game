@@ -1,9 +1,7 @@
 package com.engine.world;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.engine.assets.asset.AssetsManager;
 import com.engine.assets.model.AssetBase;
-import com.engine.renderer.Renderer;
 
 public class Object extends ObjectBase{
 
@@ -18,6 +16,24 @@ public class Object extends ObjectBase{
 
 	@Override
 	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onColliderEnter(ObjectBase other) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onColliderExit(ObjectBase other) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onColliderStay(ObjectBase other) {
 		// TODO Auto-generated method stub
 		
 	}

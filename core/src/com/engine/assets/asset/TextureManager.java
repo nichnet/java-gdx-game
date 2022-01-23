@@ -1,17 +1,11 @@
 package com.engine.assets.asset;
 
-import java.io.InputStream;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.engine.assets.AssetManagerBase;
-import com.engine.assets.ResourceBase;
-import com.engine.assets.model.AssetBase;
-import com.engine.assets.model.ObjectAsset;
 import com.engine.util.Logger;
-import com.engine.world.ObjectBase;
 
 public class TextureManager {
 

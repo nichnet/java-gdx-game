@@ -3,8 +3,6 @@ package com.engine.world;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.assets.asset.AssetsManager;
 import com.engine.assets.model.EntityAsset;
-import com.engine.renderer.Renderer;
-import com.engine.util.Logger;
 
 public class Entity extends Object {
 

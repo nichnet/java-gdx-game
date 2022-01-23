@@ -1,16 +1,20 @@
 package com.engine.world;
 
 import com.engine.assets.graphics.Animator;
+import com.engine.assets.graphics.Bounds;
 import com.engine.assets.model.AssetBase;
+import com.engine.physics.Collider;
+import com.engine.physics.IColliderEvent;
 import com.engine.util.Constants;
 import com.game.Game;
 
-public abstract class ObjectBase implements Comparable<ObjectBase> {
+public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEvent {
 
 	private String id;
 	private String assetId; 
 	private Position position;
 	private Animator animator;
+	private Collider collider;
 
 	public ObjectBase(String id, String assetId, Position position) {
 		this.id = id;
@@ -18,7 +22,9 @@ public abstract class ObjectBase implements Comparable<ObjectBase> {
 		this.position = position;
 
 		this.animator = new Animator(this);
+		this.collider = new Collider(this);
 	}
+	
 	
 	public final String getId() {
 		return this.id;
@@ -39,7 +45,6 @@ public abstract class ObjectBase implements Comparable<ObjectBase> {
 	public abstract AssetBase getAsset();
 	
 	
-	
 	public Animator getAnimator() {
 		return this.animator;
 	}
@@ -51,8 +56,17 @@ public abstract class ObjectBase implements Comparable<ObjectBase> {
 		getAnimator().render();
 	}
 
+	public Bounds getBounds() {
+		return getAnimator().getCurrentSprite().getBounds();
+	}
+	
+	
 	@Override
 	public int compareTo(ObjectBase other) {
 		return other.getPosition().getYAsPixel() - this.getPosition().getYAsPixel();
+	}
+
+	public Collider getCollider() {
+		return collider;
 	}
 }

@@ -4,7 +4,7 @@ public abstract class Component {
 
 	private String name;
 	private int x, y;
-	private int width, height;
+	private int width, heiht;
 	private boolean visible = false;
 	
 	public Component(String name) {

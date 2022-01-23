@@ -1,7 +1,6 @@
 package com.engine.world;
 
 import com.engine.assets.asset.AssetsManager;
-import com.engine.assets.model.EntityAsset;
 import com.engine.assets.model.LivingEntityAsset;
 
 public class LivingEntity extends Entity {
@@ -21,4 +20,6 @@ public class LivingEntity extends Entity {
 	public LivingEntityAsset getAsset() {
 		return AssetsManager.getInstance().getLivingEntities().get(this.getAssetId());
 	}
+	
+	
 }
