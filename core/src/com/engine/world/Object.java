@@ -18,6 +18,7 @@ public class Object extends ObjectBase {
 
 	@Override
 	public void tick() {
+		super.tick();
 		/*if(getCollider() != null) {
 			Physics.getInstance().tick(this);
 		}*/

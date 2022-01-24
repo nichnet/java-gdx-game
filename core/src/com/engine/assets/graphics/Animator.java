@@ -1,9 +1,9 @@
 package com.engine.assets.graphics;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.renderer.Renderer;
 import com.engine.util.Constants;
+import com.engine.util.Logger;
 import com.engine.world.ObjectBase;
 import com.game.Game;
 
@@ -28,7 +28,9 @@ public class Animator {
 			
 			//if((TimeUtils.timeSinceMillis(lastUpdate) < Constants.MILLIS_IN_SEC / anim.getSpeed())) {
 			if((TimeUtils.timeSinceMillis(lastUpdate) < (Constants.MILLIS_IN_SEC /anim.getSpeed()) - Constants.TICK_DELAY)) {
-						return;//only update sprite per second
+			//if((TimeUtils.timeSinceMillis(lastUpdate) < 500)) {
+				
+				return;//only update sprite per second
 			}
 		}
 		
@@ -65,13 +67,11 @@ public class Animator {
 	public Sprite getCurrentSprite() {
 		return attachedToObject.getAsset().getSprite(currentAnimation, spriteIndex);
 	}
-	
 	public void render() {	
-		if(!Game.getInstance().isPaused()) {
+		/*if(!Game.getInstance().isPaused()) {
 			advanceAnimation();			
 		}
 		
-		//attachedToObject.updateCollider()
 	
 		Renderer.getInstance().draw(attachedToObject);
 		
@@ -79,6 +79,6 @@ public class Animator {
 			if(getCurrentSprite().getBounds() != null) {
 				Renderer.getInstance().drawShape(attachedToObject);				
 			}
-		}
+		}*/
 	}
 }

@@ -39,6 +39,7 @@ public class Game extends ApplicationAdapter {
 		world = new World("world", 200, 200);
 		
 		createGameThreads();
+		
 	
 	}
 	

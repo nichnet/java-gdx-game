@@ -86,6 +86,7 @@ public class Renderer {
 	private void renderTiles() {
 		for(Tile tile : Game.getInstance().getCurrentWorld().getRenderableTiles()) {
 			tile.render();
+		
 		}
 	}
 	
@@ -152,7 +153,10 @@ public class Renderer {
 	}
 
 	public void draw(ObjectBase obj) {
-		
+
+		if(!batch.isDrawing()) {
+			return;
+		}
 		batch.draw(obj.getAnimator().getCurrentSprite().getTexture(), 
 				obj.getPosition().getXAsPixel() + obj.getAsset().getOffsetX(), 
 				obj.getPosition().getYAsPixel() + obj.getAsset().getOffsetY());

@@ -6,7 +6,7 @@ import com.engine.util.Constants;
 
 public final class Position extends Vector {
 
-	public final static int MOVE_DISTANCE = 2;
+	public final static int MOVE_DISTANCE = 4;
 	
 	public Position(int x, int y) {
 		super(x * Constants.GRID_SIZE, y * Constants.GRID_SIZE);
@@ -91,7 +91,6 @@ public final class Position extends Vector {
 		}
 		
 		return this.getX() == ((Position)other).getX() && 
-				this.getY() == ((Position)other).getY();// && 
-				//this.getZ() == ((Position)other).getZ();
+				this.getY() == ((Position)other).getY();
 	}
 }

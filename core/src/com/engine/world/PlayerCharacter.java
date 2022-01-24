@@ -3,7 +3,7 @@ package com.engine.world;
 public class PlayerCharacter extends LivingEntity {
 
 	public PlayerCharacter(String id, Position position) {
-		super(id, "man", position);
+		super(id, "player", position);
 	}
 
 	/**

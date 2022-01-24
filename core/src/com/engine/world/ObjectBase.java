@@ -5,7 +5,9 @@ import com.engine.assets.graphics.Bounds;
 import com.engine.assets.model.AssetBase;
 import com.engine.physics.Collider;
 import com.engine.physics.IColliderEvent;
+import com.engine.renderer.Renderer;
 import com.engine.util.Constants;
+import com.engine.util.Logger;
 import com.game.Game;
 
 public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEvent {
@@ -52,11 +54,23 @@ public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEve
 		return this.animator;
 	}
 	
-	public abstract void tick();
+	public void tick() {
+		if(isVisible()) {
+			//update animator.
+			getAnimator().advanceAnimation();
+		}
+	}
+	
 	
 	
 	public void render() {
-		getAnimator().render();
+		Renderer.getInstance().draw(this);
+		
+		if(Game.getInstance().isDebugModeActive()) {
+			if(getBounds() != null) {
+				Renderer.getInstance().drawShape(this);				
+			}
+		}
 	}
 
 	public Bounds getBounds() {

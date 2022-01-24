@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.assets.asset.AssetsManager;
 import com.engine.assets.model.EntityAsset;
 import com.engine.util.Constants;
+import com.engine.util.Logger;
 import com.game.Game;
 
 public class Entity extends Object {
@@ -27,7 +28,6 @@ public class Entity extends Object {
 	public void moveSouth() {
 		this.direction = Direction.SOUTH;
 		move();
-		
 	}
 
 	public void moveEast() {
@@ -40,8 +40,12 @@ public class Entity extends Object {
 		move();
 	}
 	
-	private boolean canMove(Direction west) {
-		return true;// TimeUtils.timeSinceMillis(lastMoved) >= Constants.TICK_DELAY =1;
+	private boolean canMove(Direction direction) {
+		/*TODO player cannot strafe diagonally because we are only allowing to move
+		 * after the tick delay, need to check old direction is north or south and current direction is west or east to also alllow.   
+		 */
+		
+		return Game.getInstance().getLastTick() - lastMoved > Constants.TICK_DELAY;
 	}
 
 	protected void move() { 
@@ -62,6 +66,7 @@ public class Entity extends Object {
 				this.getPosition().west();
 				break;
 		}
+		
 		updateLastMoved();
 	}
 	
@@ -72,7 +77,8 @@ public class Entity extends Object {
 	private long lastMoved = -1;
 	
 	public boolean isMoving() {
-		return TimeUtils.timeSinceMillis(lastMoved) <= Constants.TICK_DELAY;
+		//10 times multiplier for movement cooldown
+		return TimeUtils.millis() - lastMoved < Constants.TICK_DELAY *10 ;
 	}
 	
 	@Override
@@ -84,6 +90,9 @@ public class Entity extends Object {
 	
 	private void determineAnimation() {
 		if(isMoving()) {
+			if(getAssetId().equals("player")) { 
+				Logger.log("man IS  moving");
+			}
 			switch(direction) {
 				case NORTH:
 					getAnimator().setAnimation("walk_north");
@@ -99,6 +108,9 @@ public class Entity extends Object {
 					break;	
 			}
 		} else {
+			if(getAssetId().equals("player")) { 
+				Logger.log("man isnt moving");
+			}
 			switch(direction) {
 				case NORTH:
 					getAnimator().setAnimation("idle_north");
