@@ -110,7 +110,7 @@ public abstract class AssetBase extends ResourceBase {
 		List<Sprite> sprs = new ArrayList<Sprite>();
 		
 		if(sprites == null) {
-			Sprite def = new Sprite("missing").setBounds(new Bounds(new int[] {0,0,32,0,32,32,0,32}));
+			Sprite def = new Sprite("missing");//.setBounds(new Bounds(new int[] {0,0,32,0,32,32,0,32}));
 			sprs.add(def);
 		} else {
 			for(Sprite sprite : sprites) { 

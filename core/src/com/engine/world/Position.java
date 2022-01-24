@@ -1,5 +1,6 @@
 package com.engine.world;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.engine.assets.graphics.Vector;
 import com.engine.util.Constants;
 
@@ -44,7 +45,7 @@ public final class Position extends Vector {
 	 */
 	@Override
 	public int getX() {
-		return (int) Math.floor((double) (super.getX() / Constants.GRID_SIZE));
+		return (int) Math.round(Math.floor((double) (super.getX() / Constants.GRID_SIZE)));
 	}
 	
 	/**
@@ -59,7 +60,7 @@ public final class Position extends Vector {
 	 */
 	@Override
 	public int getY() {
-		return (int) Math.floor((double) (super.getY() / Constants.GRID_SIZE));
+		return (int) Math.round(Math.floor((double) (super.getY() / Constants.GRID_SIZE)));
 	}
 	
 	/**

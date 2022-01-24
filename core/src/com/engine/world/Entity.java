@@ -3,6 +3,8 @@ package com.engine.world;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.assets.asset.AssetsManager;
 import com.engine.assets.model.EntityAsset;
+import com.engine.util.Constants;
+import com.game.Game;
 
 public class Entity extends Object {
 
@@ -38,7 +40,14 @@ public class Entity extends Object {
 		move();
 	}
 	
+	private boolean canMove(Direction west) {
+		return true;// TimeUtils.timeSinceMillis(lastMoved) >= Constants.TICK_DELAY =1;
+	}
+
 	protected void move() { 
+		if(!canMove(direction)) {
+			return;
+		}
 		switch (direction) {
 			case NORTH:
 				this.getPosition().north();
@@ -63,7 +72,7 @@ public class Entity extends Object {
 	private long lastMoved = -1;
 	
 	public boolean isMoving() {
-		return TimeUtils.timeSinceMillis(lastMoved) < 60;
+		return TimeUtils.timeSinceMillis(lastMoved) <= Constants.TICK_DELAY;
 	}
 	
 	@Override

@@ -2,9 +2,11 @@ package com.engine.world;
 
 import com.engine.assets.asset.AssetsManager;
 import com.engine.assets.model.AssetBase;
+import com.engine.physics.Physics;
 
-public class Object extends ObjectBase{
-
+public class Object extends ObjectBase {
+	
+	
 	public Object(String id, String assetId, Position position) {
 		super(id, assetId, position);
 	}
@@ -16,8 +18,9 @@ public class Object extends ObjectBase{
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		/*if(getCollider() != null) {
+			Physics.getInstance().tick(this);
+		}*/
 	}
 
 	@Override

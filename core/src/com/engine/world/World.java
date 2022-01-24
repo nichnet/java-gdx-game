@@ -1,15 +1,18 @@
 package com.engine.world;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.util.Constants;
 import com.engine.util.Logger;
 import com.engine.world.npc.Man;
 import com.game.Game;
+import com.game.ThreadManager;
 
 public class World {
 
@@ -336,14 +339,15 @@ public class World {
 	/**
 	 * Ticks (updates) all items in the world.
 	 */
-	public void tick() {
+	/*public void tick() {
+		Logger.log("tiles to tick: " + tiles.size());
 		tickItems();
 		tickObjects();
 		tickTiles();
 		tickEntities();
 		tickLivingEntities();
 		tickPlayerCharacters();
-	}
+	}*/
 	
 	/**
 	 * Ticks entities.
@@ -456,5 +460,79 @@ public class World {
 		all.addAll(livingEntities.values());
 		
 		return all.toArray(new ObjectBase[] {});
+	}
+
+	public HashMap<String, Tile> getAllTiles() {
+		return tiles;
+	}
+	
+	
+	public void initializeTicking() {
+		ThreadManager.getInstance().addThread(new Runnable() {		
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {
+						tickTiles();		
+						tickObjects();			
+						tickItems();		
+						tickEntities();	
+						tickLivingEntities();		
+						tickPlayerCharacters();			
+					}
+				}
+			}
+		});
+		/*
+		ThreadManager.getInstance().addThread(new Runnable() {		
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {		
+					}
+				}
+			}
+		});
+
+		ThreadManager.getInstance().addThread(new Runnable() {		
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {
+					}
+				}
+			}
+		});
+		
+		ThreadManager.getInstance().addThread(new Runnable() {		
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {
+					}
+				}
+			}
+		});
+
+		ThreadManager.getInstance().addThread(new Runnable() {	
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {				
+					}
+				}
+			}
+		});
+		
+		ThreadManager.getInstance().addThread(new Runnable() {	
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {			
+					}
+				}
+			}
+		});
+	*/
 	}
 }

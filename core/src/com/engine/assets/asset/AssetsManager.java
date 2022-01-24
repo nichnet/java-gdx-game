@@ -104,11 +104,7 @@ public class AssetsManager extends ResourceManagerBase {
 	
 	public String[] getResourceFolderFiles (String path, String filter) {
 		FileHandle dirHandle;
-	    /*if(Gdx.app.getType() == ApplicationType.Android){
-	        dirHandle = Gdx.files.internal("levels/");
-	    } else{w TileAssetManager();
-		Logger.log(String.for
-	    */
+	   
 		dirHandle = Gdx.files.internal(path);
 	    
 		FileHandle[] files = dirHandle.list();
@@ -126,44 +122,5 @@ public class AssetsManager extends ResourceManagerBase {
 		}
 		
 		return filePaths.toArray(new String[] {});
-		/*list = getAssets().list(path);
-        if (list.length > 0) {
-            // This is a folder
-            for (String file : list) {
-                if (!listAssetFiles(path + "/" + file))
-                    return false;
-                else {
-                    // This is a file
-                    // TODO: add file name to an array list
-                }
-            }
-        } 
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-	    URL url = loader.getResource(path);
-
-	    if(url == null) {
-	    	Logger.error(String.format("Unable to get resources from path \"%s\" because it doesn\'t exist.", path));
-	    	return null;
-	    }
-	    
-	    String folderPath = url.getPath();
-	    
-	    File[] files = new File(folderPath).listFiles();
-	    List<String> filePaths = new ArrayList<String>();
-	    
-	    for(File file : files) {
-	    	String fileName = file.getName();
-	    	
-	    	if(filter != null && !filter.isEmpty()) {
-	    		if(fileName.endsWith(filter)) {
-	    	    	filePaths.add(file.getName());
-	    		}
-	    	} else {
-	    		filePaths.add(file.getName());
-	    	}
-	    }
-	    
-	    return filePaths.toArray(new String[] {} );
-		*/
 	}
 }

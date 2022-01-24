@@ -41,20 +41,19 @@ public class Renderer {
 	public void render() {
 		ScreenUtils.clear(0, 0, 0, 1);
 		batch.begin();
+		Game.getInstance().getCamera().update(batch);
 		lineRenderer.begin(ShapeRenderer.ShapeType.Line);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		lineRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-		
-		//update camera
-		Game.getInstance().getCamera().update(batch);
-		
 		
 		
 		//render only visible items within range. 
 		renderTiles();
 		renderItems();
 		renderSortedLayer();
+
+		//update camera
 		
 		batch.end();
 		lineRenderer.end();

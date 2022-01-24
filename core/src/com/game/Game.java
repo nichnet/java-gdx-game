@@ -1,6 +1,8 @@
 package com.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.renderer.Camera;
 import com.engine.renderer.Renderer;
 import com.engine.world.World;
@@ -10,6 +12,7 @@ import com.engine.assets.asset.TextureManager;
 import com.engine.assets.language.LanguageManager;
 import com.engine.assets.sounds.SoundsManager;
 import com.engine.input.InputManager;
+import com.engine.util.Constants;
 import com.engine.util.Logger;
 import com.engine.util.Settings;
 
@@ -34,7 +37,52 @@ public class Game extends ApplicationAdapter {
 		Renderer.getInstance();
 		camera = new Camera();
 		world = new World("world", 200, 200);
+		
+		createGameThreads();
+	
 	}
+	
+	private long lastTick = -1;
+
+	private Thread tickThread;
+	private Thread inputThread;
+	
+	public long getLastTick() {
+		return lastTick;
+	}
+	
+	private void createGameThreads() {
+		//game ticking thread
+		ThreadManager.getInstance().addThread(new Runnable() {	
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {
+						lastTick = TimeUtils.millis();
+					}
+				}
+			}
+		});
+		
+		//input thread
+		ThreadManager.getInstance().addThread(new Runnable() {
+			@Override
+			public void run() {
+				while(true) {
+					if(!Game.getInstance().isPaused()) {
+						if(Game.getInstance().canTick()) {							
+							InputManager.getInstance().checkInput();	
+						}
+					}
+				}
+				
+			}
+		});
+		
+		//world specific threads
+		Game.getInstance().getCurrentWorld().initializeTicking();
+	}
+	
 	
 	
 	
@@ -68,20 +116,25 @@ public class Game extends ApplicationAdapter {
 	
 	@Override
 	public void render () {
-		InputManager.getInstance().checkInput();
-		
-		if(!isPaused()) {
-			//Tick all items in the world.
-			getCurrentWorld().tick();
-		}
-
 		Renderer.getInstance().render();
 	}
 	
+	//private boolean disposed = false;
 	@Override
 	public void dispose () {
+	//	disposed = true;
+		Logger.log("disposing resources.");
 		Renderer.getInstance().dispose();
 		TextureManager.getInstance().disposeTextures();
+		ThreadManager.getInstance().disposeAll();
+		
+		if(inputThread != null) {
+			inputThread.interrupt();
+		}
+		
+		if(tickThread != null) {
+			tickThread.interrupt();
+		}
 	}
 	
 	public static Game getInstance() {
@@ -103,7 +156,22 @@ public class Game extends ApplicationAdapter {
 		this.debugMode = !debugMode;
 		Logger.log("debug state:" + debugMode);
 	}
+	
 	public Camera getCamera() {
 		return camera;
+	}
+	
+	public boolean canTick() {
+		if(isPaused()) {
+			return false;
+		}
+		
+		
+		if(TimeUtils.timeSinceMillis(lastTick) >= Constants.TICK_DELAY) {
+			//TODO magic number 60..
+			return true;
+		}
+		
+		return false;
 	}
 }

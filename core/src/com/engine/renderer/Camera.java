@@ -27,11 +27,11 @@ public class Camera {
 	}
 	
 	public void update(SpriteBatch batch) {
-		batch.setProjectionMatrix(cam.combined);
 		
 		if(attachedToEntity != null) {
 			updatePosition(attachedToEntity.getPosition());
 			cam.update();
+			batch.setProjectionMatrix(cam.combined);
 		}
 	}
 	

@@ -15,13 +15,6 @@ public class Sprite extends ResourceBase {
 	
 	public Sprite setBounds(Bounds bounds) {
 		this.bounds = bounds;
-		
-		if(this.getName().equals("sign")) {
-			Logger.log("--------");
-			for(Vector v : getBounds().getPoints()) {
-				Logger.log(v.toString());
-			}
-		}
 		return this;
 	}
 	

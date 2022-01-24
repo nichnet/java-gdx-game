@@ -1,5 +1,6 @@
 package com.engine.assets.graphics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.renderer.Renderer;
 import com.engine.util.Constants;
@@ -25,8 +26,9 @@ public class Animator {
 				return;//no point animating if its 0 speed.. just return.
 			}
 			
-			if((TimeUtils.timeSinceMillis(lastUpdate) < Constants.MILLIS_IN_SEC / anim.getSpeed())) {
-				return;//only update sprite per second
+			//if((TimeUtils.timeSinceMillis(lastUpdate) < Constants.MILLIS_IN_SEC / anim.getSpeed())) {
+			if((TimeUtils.timeSinceMillis(lastUpdate) < (Constants.MILLIS_IN_SEC /anim.getSpeed()) - Constants.TICK_DELAY)) {
+						return;//only update sprite per second
 			}
 		}
 		
@@ -35,6 +37,7 @@ public class Animator {
 		if(anim == null) {
 			return;
 		}
+		
 		int size = anim.getSpriteCount();
 		
 		if(size <= 1) {

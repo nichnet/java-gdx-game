@@ -22,7 +22,10 @@ public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEve
 		this.position = position;
 
 		this.animator = new Animator(this);
-		this.collider = new Collider(this);
+		
+		if(this.getBounds() != null) {
+			this.collider = new Collider(this);
+		}
 	}
 	
 	
@@ -60,13 +63,12 @@ public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEve
 		return getAnimator().getCurrentSprite().getBounds();
 	}
 	
+	public Collider getCollider() {
+		return collider;
+	}
 	
 	@Override
 	public int compareTo(ObjectBase other) {
 		return other.getPosition().getYAsPixel() - this.getPosition().getYAsPixel();
-	}
-
-	public Collider getCollider() {
-		return collider;
 	}
 }

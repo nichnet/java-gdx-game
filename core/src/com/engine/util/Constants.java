@@ -13,6 +13,7 @@ public class Constants {
 	public static final int ANIM_DEFAULT_SPEED = 1;
 	public static final int MILLIS_IN_SEC = 1000;
 	public static final int VIEW_DISTANCE = 20;
+	public static final long TICK_DELAY = 30;
 	
 	public static void printInputStream(InputStream is) {
 

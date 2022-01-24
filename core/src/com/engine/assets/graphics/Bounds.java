@@ -19,15 +19,8 @@ public class Bounds {
 		for(int j = 0, i = 0; i < points.length; j++, i+= 2) {
 			int x = points[i];
 			int y = points[i+1];
-			Logger.log(x + ", " + y);
 			this.points[j] = new Vector(x, y);
 		}
-		
-		for(Vector v : this.points) {
-			Logger.log(v.toString());
-		}
-		
-		
 	}
 	
 	public Vector[] getPoints() {
