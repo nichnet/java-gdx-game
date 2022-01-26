@@ -65,14 +65,17 @@ public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEve
 	
 	public void render() {
 		Renderer.getInstance().draw(this);
-		
-		if(Game.getInstance().isDebugModeActive()) {
-			if(getBounds() != null) {
-				Renderer.getInstance().drawShape(this);				
-			}
+
+/*		if(Game.getInstance().isDebugModeActive()) {
+			Renderer.getInstance().drawShape(this);	
 		}
+	*/
 	}
 
+	public void renderDebug() {
+		Renderer.getInstance().drawShape(this);		
+	}
+	
 	public Bounds getBounds() {
 		return getAnimator().getCurrentSprite().getBounds();
 	}

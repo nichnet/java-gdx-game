@@ -177,7 +177,7 @@ public class World {
 		spawnObject("bed_sack", new Position(11,10));
 		spawnObject("bed_wooden", new Position(13,10));
 		
-		spawnPlayer(Constants.generateId(), new Position(5,5), true);
+		spawnPlayer(Constants.generateId(), new Position(20,20), true);
 		spawnLivingEntity("man",new Position(8,8));
 		
 		for(int x = 0; x < width; x++) {

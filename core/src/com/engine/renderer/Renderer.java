@@ -29,44 +29,55 @@ public class Renderer {
 	
 	private SpriteBatch batch;
 	private ShapeRenderer lineRenderer;
-	private ShapeRenderer shapeRenderer;
 	
 	Texture text;
 	public Renderer() {
 		batch = new SpriteBatch();
 		lineRenderer = new ShapeRenderer();
-		shapeRenderer = new ShapeRenderer();
 }
 	
 	public void render() {
 		ScreenUtils.clear(0, 0, 0, 1);
+		
+		
 		batch.begin();
-		Game.getInstance().getCamera().update(batch);
-		lineRenderer.begin(ShapeRenderer.ShapeType.Line);
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		lineRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-		
-		
-		//render only visible items within range. 
-		renderTiles();
-		renderItems();
-		renderSortedLayer();
-
+	
 		//update camera
+		Game.getInstance().getCamera().update(batch);
 		
+	
+		//render only visible items within range. 
+		renderTiles(false);
+		renderItems(false);
+		renderSortedLayer(false);
+
 		batch.end();
-		lineRenderer.end();
-		shapeRenderer.end();
+		
+		
+		if(Game.getInstance().isDebugModeActive()) {
+			lineRenderer.begin(ShapeRenderer.ShapeType.Line);
+			lineRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+			
+			//render only visible items within range. 
+			renderTiles(true);
+			renderItems(true);
+			renderSortedLayer(true);			
+
+			lineRenderer.end();
+		}
 	}
 
-	private void renderItems() {
+	private void renderItems(boolean debug) {
 		for(Item item : Game.getInstance().getCurrentWorld().getRenderableItems()) {
-			item.render();
+			if(debug) {
+				item.renderDebug();
+			} else {
+				item.render();				
+			}
 		}
 	}
 	
-	private void renderSortedLayer() {
+	private void renderSortedLayer(boolean debug) {
 		List<ObjectBase> compiledLayer = new ArrayList<>();
 		
 		Collections.addAll(compiledLayer, Game.getInstance().getCurrentWorld().getRenderableObjects());
@@ -79,14 +90,21 @@ public class Renderer {
 		Arrays.sort(sorted);
 		
 		for(ObjectBase obj : sorted) {
-			obj.render();
+			if(debug) {
+				obj.renderDebug();
+			} else {
+				obj.render();				
+			}
 		}
 	}
 	
-	private void renderTiles() {
+	private void renderTiles(boolean debug) {
 		for(Tile tile : Game.getInstance().getCurrentWorld().getRenderableTiles()) {
-			tile.render();
-		
+			if(debug) {
+				tile.renderDebug();
+			} else {
+				tile.render();				
+			}
 		}
 	}
 	
@@ -106,18 +124,24 @@ public class Renderer {
 	}
 	
 	public void drawShape(ObjectBase obj) {
-		if(obj.getCollider().isColliding()) {
+		lineRenderer.setColor(Color.GREEN);
+		/*if(obj.getCollider().isColliding()) {
 			lineRenderer.setColor(Color.RED);
 		} else {
 			lineRenderer.setColor(Color.GREEN);
 		}
+		*/
 		drawOutline(obj);
 	}
 	
 	
 	private void drawOutline(ObjectBase obj) {
-		
 		Bounds bounds = obj.getBounds();
+		
+		if(bounds == null) {
+			return;
+		}
+		
 		Position position = obj.getPosition();
 
 		int offsetX = obj.getAsset().getOffsetX();
