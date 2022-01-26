@@ -1,5 +1,7 @@
 package com.engine.world;
 
+import com.engine.util.Logger;
+
 public class PlayerCharacter extends LivingEntity {
 
 	public PlayerCharacter(String id, Position position) {
@@ -16,19 +18,18 @@ public class PlayerCharacter extends LivingEntity {
 
 	@Override
 	public void onColliderEnter(ObjectBase other) {
-		// TODO Auto-generated method stub
-		
+		Logger.log("Entered collider of: " + other.getAssetId());
 	}
 
 	@Override
 	public void onColliderExit(ObjectBase other) {
-		// TODO Auto-generated method stub
+		Logger.log("Exited collider of: " + other.getAssetId());
 		
 	}
 
 	@Override
 	public void onColliderStay(ObjectBase other) {
-		// TODO Auto-generated method stub
+		Logger.log("Staying in collider of: " + other.getAssetId());
 		
 	}
 

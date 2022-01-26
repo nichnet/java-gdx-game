@@ -13,6 +13,7 @@ import com.engine.assets.asset.TextureManager;
 import com.engine.assets.language.LanguageManager;
 import com.engine.assets.sounds.SoundsManager;
 import com.engine.input.InputManager;
+import com.engine.physics.Physics;
 import com.engine.util.Constants;
 import com.engine.util.Logger;
 import com.engine.util.Settings;
@@ -61,6 +62,18 @@ public class Game extends ApplicationAdapter {
 				}
 			}
 		});
+		
+		ThreadManager.getInstance().addThread(new Runnable() {	
+			@Override
+			public void run() {
+				while(true) {
+					if(Game.getInstance().canTick()) {
+						Physics.getInstance().tick();
+					}
+				}
+			}
+		});
+		
 	}
 	
 	

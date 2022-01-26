@@ -5,6 +5,7 @@ import com.engine.assets.graphics.Bounds;
 import com.engine.assets.model.AssetBase;
 import com.engine.physics.Collider;
 import com.engine.physics.IColliderEvent;
+import com.engine.physics.Physics;
 import com.engine.renderer.Renderer;
 import com.engine.util.Constants;
 import com.engine.util.Logger;
@@ -61,15 +62,8 @@ public abstract class ObjectBase implements Comparable<ObjectBase>, IColliderEve
 		}
 	}
 	
-	
-	
 	public void render() {
 		Renderer.getInstance().draw(this);
-
-/*		if(Game.getInstance().isDebugModeActive()) {
-			Renderer.getInstance().drawShape(this);	
-		}
-	*/
 	}
 
 	public void renderDebug() {

@@ -1,9 +1,11 @@
 package com.engine.assets.model;
 
+import com.engine.assets.graphics.Vector;
+
 public class ObjectAsset extends AssetBase {
 	
-	public ObjectAsset(String name, int offsetX, int offsetY) {
-		super(name, offsetX, offsetY);
+	public ObjectAsset(String name, Vector offset) {
+		super(name, offset);
 	}
 
 	@Override

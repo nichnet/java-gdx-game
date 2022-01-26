@@ -1,5 +1,8 @@
 package com.engine.physics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.engine.world.ObjectBase;
 
 public class Collider {
@@ -12,24 +15,27 @@ public class Collider {
 	}
 
 	public boolean isColliding() {
-		return this.isColliding;
+		return collisions.size() > 0;//if more than 0 active collisions, then object is colliding.
 	}
 	
+	private List<ObjectBase> collisions = new ArrayList<>();
+	
 	public void setCollision(ObjectBase other, boolean colliding) {
-		if(colliding) {
-			if(isColliding) {
-				//then was already colliding. so stay
-				events.onColliderStay(other);
+		if(collisions.contains(other)) {
+			if(!colliding) {
+				//remove other from active collisions if no longer colliding.
+				collisions.remove(other);
+				events.onColliderExit(other);
 			} else {
-				events.onColliderEnter(other);
+				//was previously colliding and is still colliding ,
+				events.onColliderStay(other);
 			}
 		} else {
-			if(isColliding) {
-				//was previously colliding... no longer colliding.
-				events.onColliderExit(other);
+			//was not previously colliding with other object but now is.
+			if(colliding) {
+				collisions.add(other);
+				events.onColliderEnter(other);
 			}
 		}
-		
-		isColliding = colliding;
 	}
 }

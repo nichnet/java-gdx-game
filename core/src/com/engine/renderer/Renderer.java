@@ -124,13 +124,16 @@ public class Renderer {
 	}
 	
 	public void drawShape(ObjectBase obj) {
-		lineRenderer.setColor(Color.GREEN);
-		/*if(obj.getCollider().isColliding()) {
-			lineRenderer.setColor(Color.RED);
-		} else {
-			lineRenderer.setColor(Color.GREEN);
-		}
-		*/
+		lineRenderer.setColor(Color.GREEN);	
+			
+		
+		
+		if(obj.getCollider() != null) {
+			if(obj.getCollider().isColliding()) {
+				lineRenderer.setColor(Color.RED);
+			}
+		}	
+		//color is green if no collider or not colliding.
 		drawOutline(obj);
 	}
 	
@@ -144,16 +147,15 @@ public class Renderer {
 		
 		Position position = obj.getPosition();
 
-		int offsetX = obj.getAsset().getOffsetX();
-		int offsetY = obj.getAsset().getOffsetY();
+		Vector offset = obj.getAsset().getOffset();
 		
 		Vector first = null;
 		Vector previous = null;
 		
 		if(bounds.getPoints().length > 0) {
 			for(Vector point : bounds.getPoints()) {
-				int endX = position.getXAsPixel() + point.getX() + offsetX;
-				int endY = position.getYAsPixel() + point.getY() + offsetY;
+				int endX = position.getXAsPixel() + point.getX() + offset.getX();
+				int endY = position.getYAsPixel() + point.getY() + offset.getY();
 				Vector end = new Vector(endX, endY);
 				
 				
@@ -182,7 +184,7 @@ public class Renderer {
 			return;
 		}
 		batch.draw(obj.getAnimator().getCurrentSprite().getTexture(), 
-				obj.getPosition().getXAsPixel() + obj.getAsset().getOffsetX(), 
-				obj.getPosition().getYAsPixel() + obj.getAsset().getOffsetY());
+				obj.getPosition().getXAsPixel() + obj.getAsset().getOffset().getX(), 
+				obj.getPosition().getYAsPixel() + obj.getAsset().getOffset().getY());
 	}
 }

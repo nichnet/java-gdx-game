@@ -449,15 +449,61 @@ public class World {
 		return (this.width * this.height);
 	}
 
+	public int getLargestSize() {
+		return 10;
+	}
+	
+	public ObjectBase[] getAllObjectNear(ObjectBase obj) {
+		List<ObjectBase> all = new ArrayList<>();
+		
+		/*for(Tile tile : tiles.values()) {
+			if(tile.getPosition().getDistance(obj.getPosition()) <= getLargestSize()) {
+				all.add(tile);
+			}
+		}
+		*/
+		for(Object obje : objects.values()) {
+			if(obje.getPosition().getDistance(obj.getPosition()) <= getLargestSize()) {
+				all.add(obje);
+			}
+		}
+		/*
+		for(Item item : items.values()) {
+			if(item.getPosition().getDistance(obj.getPosition()) <= getLargestSize()) {
+				all.add(item );
+			}
+		}
+		*/
+		for(PlayerCharacter pc : playerCharacters.values()) {
+			if(pc.getPosition().getDistance(obj.getPosition()) <= getLargestSize()) {
+				all.add(pc);
+			}
+		}
+
+		for(Entity entity : entities.values()) {
+			if(entity.getPosition().getDistance(obj.getPosition()) <= getLargestSize()) {
+				all.add(entity);
+			}
+		}
+		
+		for(LivingEntity entity : livingEntities.values()) {
+			if(entity.getPosition().getDistance(obj.getPosition()) <= getLargestSize()) {
+				all.add(entity);
+			}
+		}
+		
+		return all.toArray(new ObjectBase[] {});
+	}
+
 	public ObjectBase[] getAllObjects() {
 		List<ObjectBase> all = new ArrayList<>();
-
-		all.addAll(tiles.values());
-		all.addAll(objects.values());
-		all.addAll(items.values());
+		
+		//all.addAll(tiles.values());
+	    all.addAll(objects.values());
+		//all.addAll(items.values());
 		all.addAll(playerCharacters.values());
-		all.addAll(entities.values());
-		all.addAll(livingEntities.values());
+	//	all.addAll(entities.values());
+	//	all.addAll(livingEntities.values());
 		
 		return all.toArray(new ObjectBase[] {});
 	}

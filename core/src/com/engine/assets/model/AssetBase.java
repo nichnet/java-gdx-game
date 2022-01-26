@@ -7,31 +7,26 @@ import com.engine.assets.ResourceBase;
 import com.engine.assets.graphics.Animation;
 import com.engine.assets.graphics.Bounds;
 import com.engine.assets.graphics.Sprite;
+import com.engine.assets.graphics.Vector;
 import com.engine.assets.language.LanguageManager;
 
 public abstract class AssetBase extends ResourceBase {
 
 	private Sprite[] sprites;
 	private Animation[] animations;
-	
-	private int offsetX;
-	private int offsetY;
+	private Vector offset;
 	
 	public AssetBase(String name) {
-		this(name, 0, 0);
+		this(name, Vector.zero());
 	}
 
-	public AssetBase(String name, int offsetX, int offsetY) {
+	public AssetBase(String name, Vector offset) {
 		super(name);
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
+		this.offset = offset;
 	}
 	
-	public int getOffsetX() {
-		return this.offsetX;
-	}
-	public int getOffsetY() {
-		return this.offsetY;
+	public Vector getOffset() {
+		return offset;
 	}
 	
 	public Sprite getDefaultSprite() {

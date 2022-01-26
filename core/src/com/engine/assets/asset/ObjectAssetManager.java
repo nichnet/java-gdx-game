@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.engine.assets.AssetManagerBase;
 import com.engine.assets.graphics.Animation;
 import com.engine.assets.graphics.Sprite;
+import com.engine.assets.graphics.Vector;
 import com.engine.assets.model.ObjectAsset;
 import com.engine.util.Logger;
 
@@ -57,19 +58,21 @@ public final class ObjectAssetManager extends AssetManagerBase {
 				
 				
 				//offset
-				int offsetX = 0;
-				int offsetY = 0;
+				Vector offset = Vector.zero();
 				
 				if(hasProperty(obj, "offset")) {
-					JSONObject offset = (JSONObject) obj.get("offset");
-					offsetX = (int) ((long) getProperty(offset, "x"));
-					offsetY = (int) ((long) getProperty(offset, "y"));
+					JSONObject offsetData = (JSONObject) obj.get("offset");
+					offset.setX((int) ((long) getProperty(offsetData, "x")));
+					offset.setY((int) ((long) getProperty(offsetData, "y")));
 				}
+				
 				
 				//properties specific to objects
 				JSONObject properties = (JSONObject) obj.get("properties");
 				
-				addAsset(name, sprites, animations, offsetX, offsetY);
+				
+				
+				addAsset(name, sprites, animations, offset);
 				in.close();
 			} catch (IOException e) {
 				Logger.error(String.format("Failed to load object resource: \"%s\", because the file could not be opened or located.", file));
@@ -80,12 +83,12 @@ public final class ObjectAssetManager extends AssetManagerBase {
 		}
 	}
 
-	private void addAsset(String name, Sprite[] sprites, Animation[] animations, int offsetX, int offsetY) {
+	private void addAsset(String name, Sprite[] sprites, Animation[] animations, Vector offset) {
 		if(this.assets.containsKey(name)) {
 			return;
 		}
 		
-		ObjectAsset asset = new ObjectAsset(name, offsetX, offsetY).setSprites(sprites).setAnimations(animations);
+		ObjectAsset asset = new ObjectAsset(name, offset).setSprites(sprites).setAnimations(animations);
 		
 		this.assets.put(name, asset);
 	}
