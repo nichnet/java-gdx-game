@@ -2,6 +2,7 @@ package com.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.renderer.Camera;
 import com.engine.renderer.Renderer;
@@ -39,14 +40,9 @@ public class Game extends ApplicationAdapter {
 		world = new World("world", 200, 200);
 		
 		createGameThreads();
-		
-	
 	}
 	
 	private long lastTick = -1;
-
-	private Thread tickThread;
-	private Thread inputThread;
 	
 	public long getLastTick() {
 		return lastTick;
@@ -60,30 +56,12 @@ public class Game extends ApplicationAdapter {
 				while(true) {
 					if(Game.getInstance().canTick()) {
 						lastTick = TimeUtils.millis();
+						getCurrentWorld().tickWorld();
 					}
 				}
 			}
 		});
-		
-		//input thread
-		ThreadManager.getInstance().addThread(new Runnable() {
-			@Override
-			public void run() {
-				while(true) {
-					if(!Game.getInstance().isPaused()) {
-						if(Game.getInstance().canTick()) {							
-							InputManager.getInstance().checkInput();	
-						}
-					}
-				}
-				
-			}
-		});
-		
-		//world specific threads
-		Game.getInstance().getCurrentWorld().initializeTicking();
 	}
-	
 	
 	
 	
@@ -117,6 +95,7 @@ public class Game extends ApplicationAdapter {
 	
 	@Override
 	public void render () {
+		InputManager.getInstance().checkInput();
 		Renderer.getInstance().render();
 	}
 	
@@ -128,14 +107,6 @@ public class Game extends ApplicationAdapter {
 		Renderer.getInstance().dispose();
 		TextureManager.getInstance().disposeTextures();
 		ThreadManager.getInstance().disposeAll();
-		
-		if(inputThread != null) {
-			inputThread.interrupt();
-		}
-		
-		if(tickThread != null) {
-			tickThread.interrupt();
-		}
 	}
 	
 	public static Game getInstance() {

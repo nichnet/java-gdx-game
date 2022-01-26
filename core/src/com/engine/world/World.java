@@ -466,73 +466,12 @@ public class World {
 		return tiles;
 	}
 	
-	
-	public void initializeTicking() {
-		ThreadManager.getInstance().addThread(new Runnable() {		
-			@Override
-			public void run() {
-				while(true) {
-					if(Game.getInstance().canTick()) {
-						tickTiles();		
-						tickObjects();			
-						tickItems();		
-						tickEntities();	
-						tickLivingEntities();		
-						tickPlayerCharacters();			
-					}
-				}
-			}
-		});
-		/*
-		ThreadManager.getInstance().addThread(new Runnable() {		
-			@Override
-			public void run() {
-				while(true) {
-					if(Game.getInstance().canTick()) {		
-					}
-				}
-			}
-		});
-
-		ThreadManager.getInstance().addThread(new Runnable() {		
-			@Override
-			public void run() {
-				while(true) {
-					if(Game.getInstance().canTick()) {
-					}
-				}
-			}
-		});
-		
-		ThreadManager.getInstance().addThread(new Runnable() {		
-			@Override
-			public void run() {
-				while(true) {
-					if(Game.getInstance().canTick()) {
-					}
-				}
-			}
-		});
-
-		ThreadManager.getInstance().addThread(new Runnable() {	
-			@Override
-			public void run() {
-				while(true) {
-					if(Game.getInstance().canTick()) {				
-					}
-				}
-			}
-		});
-		
-		ThreadManager.getInstance().addThread(new Runnable() {	
-			@Override
-			public void run() {
-				while(true) {
-					if(Game.getInstance().canTick()) {			
-					}
-				}
-			}
-		});
-	*/
+	public void tickWorld() {
+		tickTiles();		
+		tickObjects();			
+		tickItems();		
+		tickEntities();	
+		tickLivingEntities();		
+		tickPlayerCharacters();				
 	}
 }

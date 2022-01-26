@@ -6,7 +6,7 @@ import com.engine.util.Constants;
 
 public final class Position extends Vector {
 
-	public final static int MOVE_DISTANCE = 2;
+	public final static int MOVE_DISTANCE = 1;
 	
 	public Position(int x, int y) {
 		super(x * Constants.GRID_SIZE, y * Constants.GRID_SIZE);

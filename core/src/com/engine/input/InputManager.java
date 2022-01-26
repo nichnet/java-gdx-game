@@ -10,7 +10,6 @@ public class InputManager {
 	private static InputManager instance;
 	
 	public void checkInput() {
-		//TODO should only be pressed once. This is for "held"
 		if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			Logger.log("escape key pressed");
 			Game.getInstance().swapPauseState();
@@ -24,8 +23,7 @@ public class InputManager {
 		if(!Game.getInstance().isPaused()) {
 			//in game.
 			if(Gdx.input.isKeyPressed(Input.Keys.A)){
-				Logger.log("A key down");
-	            Game.getInstance().getCurrentWorld().getLocalPlayerCharacter()
+			 Game.getInstance().getCurrentWorld().getLocalPlayerCharacter()
 	            	.moveWest();
 			} else if(Gdx.input.isKeyPressed(Input.Keys.D)){
 	            Game.getInstance().getCurrentWorld().getLocalPlayerCharacter()
@@ -40,7 +38,6 @@ public class InputManager {
             	.moveSouth();
 			}
 		}
-		
 	}
 	
 	public static InputManager getInstance() {

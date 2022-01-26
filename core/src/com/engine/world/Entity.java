@@ -44,8 +44,7 @@ public class Entity extends Object {
 		/*TODO player cannot strafe diagonally because we are only allowing to move
 		 * after the tick delay, need to check old direction is north or south and current direction is west or east to also alllow.   
 		 */
-		
-		return Game.getInstance().getLastTick() - lastMoved > Constants.TICK_DELAY;
+		return true;
 	}
 
 	protected void move() { 
@@ -90,9 +89,6 @@ public class Entity extends Object {
 	
 	private void determineAnimation() {
 		if(isMoving()) {
-			if(getAssetId().equals("player")) { 
-				Logger.log("man IS  moving");
-			}
 			switch(direction) {
 				case NORTH:
 					getAnimator().setAnimation("walk_north");
@@ -108,9 +104,6 @@ public class Entity extends Object {
 					break;	
 			}
 		} else {
-			if(getAssetId().equals("player")) { 
-				Logger.log("man isnt moving");
-			}
 			switch(direction) {
 				case NORTH:
 					getAnimator().setAnimation("idle_north");
