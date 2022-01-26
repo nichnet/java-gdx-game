@@ -70,6 +70,23 @@ public final class Position extends Vector {
 		return super.getY();
 	}
 
+
+	public boolean isNorthOf(Position position) {
+		return getYAsPixel() >= position.getYAsPixel();
+	}
+
+	public boolean isSouthOf(Position position) {
+		return getYAsPixel() <= position.getYAsPixel();
+	}
+
+	public boolean isEastOf(Position position) {
+		return getXAsPixel() >= position.getXAsPixel();
+	}
+
+	public boolean isWestOf(Position position) {
+		return getXAsPixel() <= position.getXAsPixel();
+	}
+	
 	/**
 	 * @return Returns the distance between two positions (in grid size units).
 	 */
@@ -93,4 +110,6 @@ public final class Position extends Vector {
 		return this.getX() == ((Position)other).getX() && 
 				this.getY() == ((Position)other).getY();
 	}
+
+
 }

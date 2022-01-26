@@ -10,7 +10,7 @@ import java.util.Random;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.util.Constants;
 import com.engine.util.Logger;
-import com.engine.world.npc.Man;
+import com.engine.world.npc.Human;
 import com.game.Game;
 import com.game.ThreadManager;
 
@@ -177,8 +177,8 @@ public class World {
 		spawnObject("bed_sack", new Position(11,10));
 		spawnObject("bed_wooden", new Position(13,10));
 		
-		spawnPlayer(Constants.generateId(), new Position(20,20), true);
-		spawnLivingEntity("man",new Position(8,8));
+		spawnPlayer(Constants.generateId(), new Position(10,10), true);
+		spawnLivingEntity("human",new Position(8,8));
 		
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
@@ -224,8 +224,8 @@ public class World {
 		LivingEntity entity = null;
 		String id = Constants.generateId();
 		
-		if(type.equals("man")) {
-			entity = new Man(id, type, position);
+		if(type.equals("human")) {
+			entity = new Human(id, type, position);
 		} else {
 			entity = new LivingEntity(id, type, position);
 		}

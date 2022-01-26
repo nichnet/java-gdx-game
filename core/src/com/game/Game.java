@@ -67,8 +67,9 @@ public class Game extends ApplicationAdapter {
 			@Override
 			public void run() {
 				while(true) {
+					Physics.getInstance().tick();
 					if(Game.getInstance().canTick()) {
-						Physics.getInstance().tick();
+						
 					}
 				}
 			}

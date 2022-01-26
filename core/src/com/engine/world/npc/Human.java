@@ -3,9 +3,9 @@ package com.engine.world.npc;
 import com.engine.world.LivingEntity;
 import com.engine.world.Position;
 
-public class Man extends LivingEntity {
+public class Human extends LivingEntity {
 
-	public Man(String id, String assetId, Position position) {
+	public Human(String id, String assetId, Position position) {
 		super(id, assetId, position);
 	}
 	

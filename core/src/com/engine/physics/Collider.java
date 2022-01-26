@@ -3,7 +3,9 @@ package com.engine.physics;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.engine.world.Entity.Direction;
 import com.engine.world.ObjectBase;
+import com.engine.world.Position;
 
 public class Collider {
 
@@ -37,5 +39,37 @@ public class Collider {
 				events.onColliderEnter(other);
 			}
 		}
+	}
+	
+	
+
+	public boolean isCollisionInDirection(Direction direction, Position position) {
+		for(ObjectBase other : collisions) {
+			//TODO think this has to be bounds not position. 
+			switch(direction) {
+			case NORTH:
+				if(other.getPosition().isNorthOf(position)) {
+					return true;
+				}
+				break;
+			case EAST:
+				if(other.getPosition().isEastOf(position)) {
+					return true;
+				}
+				break;
+			case SOUTH:
+				if(other.getPosition().isSouthOf(position)) {
+					return true;
+				}
+				break;
+			case WEST:
+				if(other.getPosition().isWestOf(position)) {
+					return true;
+				}
+				break;
+			}
+		}
+
+		return false;
 	}
 }

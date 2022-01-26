@@ -41,10 +41,13 @@ public class Entity extends Object {
 	}
 	
 	private boolean canMove(Direction direction) {
+		
+		return !getCollider().isCollisionInDirection(direction, getPosition());
+		
 		/*TODO player cannot strafe diagonally because we are only allowing to move
 		 * after the tick delay, need to check old direction is north or south and current direction is west or east to also alllow.   
 		 */
-		return true;
+	//	return true;
 	}
 
 	protected void move() { 
