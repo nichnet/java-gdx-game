@@ -5,11 +5,8 @@ public class Label extends Component {
 	private String value;
 	
 	public Label(String name, String value) {
-		super(name);
+		super(name, 0,0,0,0);//todo determine size of label
 		this.value = value;
-	}
-	public Label(String name) {
-		super(name);
 	}
 	
 	public String getValue() {

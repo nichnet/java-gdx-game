@@ -1,8 +1,8 @@
 {
-	"name": "bed_sack",
+	"name": "bed_metal",
 	"sprites": [
 		{
-			"name":"bed_sack",
+			"name":"bed_metal",
 			"bounds": [
 				0, 10,
 				0, 54,
@@ -14,7 +14,7 @@
 		{
 			"name":"default",
 			"sprites": [
-				"bed_sack"
+				"bed_metal"
 			]
 		}
 	]

@@ -3,7 +3,7 @@ package com.engine.ui;
 public abstract class ButtonBase extends Label {
 
 	public ButtonBase(String name) {
-		super(name);
+		super(name,"");//TODO 
 	}
 	public ButtonBase(String name, String value) {
 		super(name, value);

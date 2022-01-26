@@ -39,21 +39,12 @@ public class Entity extends Object {
 		this.direction = Direction.WEST;
 		move();
 	}
-	
-	private boolean canMove(Direction direction) {
-		
-		return !getCollider().isCollisionInDirection(direction, getPosition());
-		
-		/*TODO player cannot strafe diagonally because we are only allowing to move
-		 * after the tick delay, need to check old direction is north or south and current direction is west or east to also alllow.   
-		 */
-	//	return true;
-	}
 
 	protected void move() { 
-		if(!canMove(direction)) {
+		if(!canMove()) {
 			return;
 		}
+		
 		switch (direction) {
 			case NORTH:
 				this.getPosition().north();
@@ -63,6 +54,7 @@ public class Entity extends Object {
 				break;
 			case SOUTH:
 				this.getPosition().south();
+				
 				break;
 			case WEST:
 				this.getPosition().west();
@@ -71,7 +63,16 @@ public class Entity extends Object {
 		
 		updateLastMoved();
 	}
-	
+
+	private boolean canMove() {
+		if(getCollider() == null) {
+			return true;
+		}
+		
+		return true;
+		//TODO return getCollider().canMoveInDirection();
+	}
+
 	private void updateLastMoved() {
 		lastMoved = TimeUtils.millis();
 	}
@@ -88,6 +89,10 @@ public class Entity extends Object {
 		super.tick();
 		//TODO other brain things.. FSM
 		determineAnimation();
+	}
+	
+	public Direction getDirection() {
+		return this.direction;
 	}
 	
 	private void determineAnimation() {

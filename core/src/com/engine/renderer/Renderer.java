@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.engine.assets.graphics.Bounds;
 import com.engine.assets.graphics.Vector;
 import com.engine.assets.model.AssetBase;
+import com.engine.ui.Component;
+import com.engine.ui.UIManager;
 import com.engine.util.Logger;
 import com.engine.world.Item;
 import com.engine.world.ObjectBase;
@@ -26,13 +28,15 @@ import com.game.Game;
 public class Renderer {
 
 	private static Renderer instance;
-	
-	private SpriteBatch batch;
+
+	private SpriteBatch spriteBatch;
+	private SpriteBatch uiBatch;
 	private ShapeRenderer lineRenderer;
 	
 	Texture text;
 	public Renderer() {
-		batch = new SpriteBatch();
+		spriteBatch = new SpriteBatch();
+		uiBatch = new SpriteBatch();
 		lineRenderer = new ShapeRenderer();
 }
 	
@@ -40,23 +44,15 @@ public class Renderer {
 		ScreenUtils.clear(0, 0, 0, 1);
 		
 		
-		batch.begin();
-	
-		//update camera
-		Game.getInstance().getCamera().update(batch);
-		
-	
-		//render only visible items within range. 
-		renderTiles(false);
-		renderItems(false);
-		renderSortedLayer(false);
+		renderSprites();
+		renderUI();
+		renderDebug();	
+	}
 
-		batch.end();
-		
-		
+	private void renderDebug() {
 		if(Game.getInstance().isDebugModeActive()) {
 			lineRenderer.begin(ShapeRenderer.ShapeType.Line);
-			lineRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+			lineRenderer.setProjectionMatrix(spriteBatch.getProjectionMatrix());
 			
 			//render only visible items within range. 
 			renderTiles(true);
@@ -67,11 +63,45 @@ public class Renderer {
 		}
 	}
 
+	private void renderUI() {
+		uiBatch.begin();
+		
+		//uiBatch.setProjectionMatrix(spriteBatch.getProjectionMatrix());
+		for(Component component : UIManager.getInstance().getRenderableComponents()) {
+			renderUIComponent(component);
+		}
+		uiBatch.end();
+	}
+	
+	private void renderUIComponent(Component component) { 
+		//TODO dont stretch . should repeat texture. this can be determined from width and height and size of the texture..
+		uiBatch.draw(component.getBackground(), 
+				component.getX(), 
+				component.getY(), 
+				component.getX() + component.getWidth(), 
+				component.getY() + component.getHeight());
+	}
+	
+	private void renderSprites() {
+		spriteBatch.begin();
+		
+		//update camera
+		Game.getInstance().getCamera().update(spriteBatch);
+	
+		//render only visible items within range. 
+		renderTiles(false);
+		renderItems(false);
+		renderSortedLayer(false);
+
+		spriteBatch.end();
+	}
+
 	private void renderItems(boolean debug) {
 		for(Item item : Game.getInstance().getCurrentWorld().getRenderableItems()) {
 			if(debug) {
 				item.renderDebug();
 			} else {
+				//TODO should move this to here. not within item.
 				item.render();				
 			}
 		}
@@ -109,10 +139,9 @@ public class Renderer {
 	}
 	
 	public void dispose() {
-		batch.dispose();
-		
-		//dispose all textures.
-		//img.dispose();
+		spriteBatch.dispose();
+		uiBatch.dispose();
+		lineRenderer.dispose();
 	}
 	
 	public static Renderer getInstance() {
@@ -126,8 +155,6 @@ public class Renderer {
 	public void drawShape(ObjectBase obj) {
 		lineRenderer.setColor(Color.GREEN);	
 			
-		
-		
 		if(obj.getCollider() != null) {
 			if(obj.getCollider().isColliding()) {
 				lineRenderer.setColor(Color.RED);
@@ -136,7 +163,6 @@ public class Renderer {
 		//color is green if no collider or not colliding.
 		drawOutline(obj);
 	}
-	
 	
 	private void drawOutline(ObjectBase obj) {
 		Bounds bounds = obj.getBounds();
@@ -180,10 +206,10 @@ public class Renderer {
 
 	public void draw(ObjectBase obj) {
 
-		if(!batch.isDrawing()) {
+		if(!spriteBatch.isDrawing()) {
 			return;
 		}
-		batch.draw(obj.getAnimator().getCurrentSprite().getTexture(), 
+		spriteBatch.draw(obj.getAnimator().getCurrentSprite().getTexture(), 
 				obj.getPosition().getXAsPixel() + obj.getAsset().getOffset().getX(), 
 				obj.getPosition().getYAsPixel() + obj.getAsset().getOffset().getY());
 	}

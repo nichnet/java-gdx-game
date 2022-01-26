@@ -34,7 +34,6 @@ public class Physics {
 			}
 		}
 
-		Logger.log("ticking objs");
 	}
 
 	private void checkCollision(ObjectBase obj, ObjectBase other) {

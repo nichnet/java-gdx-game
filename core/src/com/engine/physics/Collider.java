@@ -9,11 +9,10 @@ import com.engine.world.Position;
 
 public class Collider {
 
-	private boolean isColliding = false;
-	private IColliderEvent events;
+	private ObjectBase attachedToObject;
 	
-	public Collider(IColliderEvent events) {
-		this.events = events;
+	public Collider(ObjectBase object) {
+		this.attachedToObject = object;
 	}
 
 	public boolean isColliding() {
@@ -27,16 +26,16 @@ public class Collider {
 			if(!colliding) {
 				//remove other from active collisions if no longer colliding.
 				collisions.remove(other);
-				events.onColliderExit(other);
+				attachedToObject.onColliderExit(other);
 			} else {
 				//was previously colliding and is still colliding ,
-				events.onColliderStay(other);
+				attachedToObject.onColliderStay(other);
 			}
 		} else {
 			//was not previously colliding with other object but now is.
 			if(colliding) {
 				collisions.add(other);
-				events.onColliderEnter(other);
+				attachedToObject.onColliderEnter(other);
 			}
 		}
 	}
@@ -71,5 +70,14 @@ public class Collider {
 		}
 
 		return false;
+	}
+
+	public boolean canMoveInDirection() {
+		for(ObjectBase other : collisions) {
+			return false;
+		}//TODO
+		
+		
+		return true;
 	}
 }

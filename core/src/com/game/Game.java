@@ -6,6 +6,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.engine.renderer.Camera;
 import com.engine.renderer.Renderer;
+import com.engine.ui.Panel;
+import com.engine.ui.UIManager;
 import com.engine.world.World;
 
 import com.engine.assets.asset.AssetsManager;
@@ -39,10 +41,20 @@ public class Game extends ApplicationAdapter {
 		Renderer.getInstance();
 		camera = new Camera();
 		world = new World("world", 200, 200);
+
+		createUI();
+		
+		
 		
 		createGameThreads();
 	}
 	
+	private void createUI() {
+		Panel pnl1 = new Panel("test", 32, 32, 128, 128);
+		UIManager.getInstance().create(pnl1);
+		UIManager.getInstance().show("test");
+	}
+
 	private long lastTick = -1;
 	
 	public long getLastTick() {
@@ -67,9 +79,8 @@ public class Game extends ApplicationAdapter {
 			@Override
 			public void run() {
 				while(true) {
-					Physics.getInstance().tick();
 					if(Game.getInstance().canTick()) {
-						
+						Physics.getInstance().tick();
 					}
 				}
 			}
